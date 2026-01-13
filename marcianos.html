@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Marcianos al Rescate</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:url("fondo.png") center/cover no-repeat fixed;
+}
+.overlay{
+    background:rgba(255,255,255,0.75);
+    min-height:100vh;
+    padding:20px;
+    text-align:center;
+}
+h1{font-size:42px;}
+
+.sabores{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.sabor{
+    width:200px;
+    padding:20px;
+    border-radius:15px;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 5px 12px rgba(0,0,0,0.3);
+}
+
+.chicha{background:#6b1b7a;color:white;}
+.pina{background:#f5c400;color:#3b2b00;}
+.maracumango{background:#f05a28;color:white;}
+.maracuya{background:#f7a400;color:#3b2b00;}
+
+#modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+
+#modalContent{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+}
+
+#modalContent img{
+    width:260px;
+}
+
+.precio{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.cerrar{
+    margin-top:10px;
+    color:red;
+    font-weight:bold;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="overlay">
+<h1>Marcianos al Rescate</h1>
+
+<div class="sabores">
+    <div class="sabor chicha" data-img="chicha.png" data-precio="S/ 2.00">Chicha Morada</div>
+    <div class="sabor pina" data-img="pina.png" data-precio="S/ 2.00">Piña</div>
+    <div class="sabor maracumango" data-img="maracumango.png" data-precio="S/ 2.50">Maracumango</div>
+    <div class="sabor maracuya" data-img="maracuya.png" data-precio="S/ 2.50">Maracuyá</div>
+</div>
+</div>
+
+<div id="modal">
+    <div id="modalContent">
+        <div class="precio" id="precio"></div>
+        <img id="imagen">
+        <div class="cerrar">Cerrar</div>
+    </div>
+</div>
+
+<script>
+const sabores = document.querySelectorAll(".sabor");
+const modal = document.getElementById("modal");
+const imagen = document.getElementById("imagen");
+const precio = document.getElementById("precio");
+const cerrar = document.querySelector(".cerrar");
+
+sabores.forEach(sabor=>{
+    sabor.onclick = ()=>{
+        imagen.src = sabor.dataset.img;
+        precio.innerText = sabor.dataset.precio;
+        modal.style.display = "flex";
+    }
+});
+
+cerrar.onclick = ()=> modal.style.display = "none";
+</script>
+
+</body>
+</html>
